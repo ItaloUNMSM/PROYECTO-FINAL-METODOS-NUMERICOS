@@ -1,0 +1,66 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Definición de la función objetivo f(d) = V(d) - 4.00
+def f(d):
+    V_d = (4.28 - 0.02*(d - 72) - 0.0071875*(d - 72)*(d - 76) - 0.00216934*(d - 72)*(d - 76)*(d - 80))
+    return V_d - 4.00
+
+# 2. Definición de la derivada analítica f'(d)
+def df(d):
+    derivada = (-0.02 - 0.0071875*(2*d - 148) - 0.00216934*(3*(d**2) - 456*d + 17312))
+    return derivada
+
+# 3. Parámetros iniciales del método numérico
+d_inicial = 78.0
+tolerancia = 0.0001
+error = 100.0
+iteracion = 0
+max_iter = 100
+
+print("--- Método de Newton-Raphson (Umbral 4.00 V) ---")
+
+# 4. Bucle iterativo principal
+while error > tolerancia and iteracion < max_iter:
+    d_nueva = d_inicial - (f(d_inicial) / df(d_inicial))
+    error = abs((d_nueva - d_inicial) / d_nueva) * 100
+    iteracion += 1
+    print(f"Iteración {iteracion}: Distancia = {d_nueva:.4f} cm | Error = {error:.4f}%")
+    d_inicial = d_nueva
+
+print("-" * 55)
+print("Convergencia exitosa.")
+print(f"La distancia crítica (d_critica) calculada es: {d_inicial:.2f} cm")
+
+# 5. GENERACIÓN DE LA GRÁFICA
+# Crear un vector de distancias para trazar la curva suavemente (de 72 a 85 cm)
+d_vals = np.linspace(72, 85, 200)
+
+# Evaluar el Polinomio de Newton original V(d) para la gráfica
+V_vals = (4.28 - 0.02*(d_vals - 72) - 0.0071875*(d_vals - 72)*(d_vals - 76) - 0.00216934*(d_vals - 72)*(d_vals - 76)*(d_vals - 80))
+
+# Configurar el lienzo
+plt.figure(figsize=(9, 6))
+
+# Trazar la curva del voltaje interpolado
+plt.plot(d_vals, V_vals, 'b-', linewidth=2, label='Polinomio Interpolante V(d)')
+
+# Trazar la línea del umbral crítico
+plt.axhline(y=4.00, color='r', linestyle='--', linewidth=1.5, label='Umbral Crítico (4.00 V)')
+
+# Marcar el punto exacto hallado por Newton-Raphson
+plt.plot(d_inicial, 4.00, 'go', markersize=8, label=f'Raíz hallada: d = {d_inicial:.2f} cm')
+
+# Trazar los puntos experimentales originales como referencia
+plt.plot([72, 76, 80, 85], [4.28, 4.20, 3.89, 1.91], 'ks', label='Datos Experimentales')
+
+# Estilos de la gráfica
+plt.title('Atenuación de la Señal y Detección de Umbral', fontsize=14, fontweight='bold')
+plt.xlabel('Distancia d (cm)', fontsize=12)
+plt.ylabel('Voltaje medido V (V)', fontsize=12)
+plt.legend(loc='lower left', fontsize=10)
+plt.grid(True, linestyle=':', alpha=0.7)
+
+# Mostrar la gráfica en pantalla
+plt.tight_layout()
+plt.show()
