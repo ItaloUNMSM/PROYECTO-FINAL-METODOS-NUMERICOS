@@ -1,0 +1,65 @@
+% --- Derivación Numérica ---
+% Diferencias Finitas Centradas O(h^2)
+clc; clear; close all;
+
+% 1. Datos experimentales (30 mediciones)
+d = [5 8 10 12 15 18 20 22 25 28 30 33 36 40 44 48 52 56 60 64 68 72 76 80 85 90 95 100 110 120];
+V = [7.62 7.58 7.55 7.50 7.45 7.37 7.26 7.16 6.71 6.52 6.41 6.34 6.19 5.95 5.89 5.75 5.62 5.55 5.50 4.45 4.32 4.28 4.20 3.89 1.91 1.66 0.86 0.54 0.28 0.26];
+
+n = length(d);
+
+%% 2. Formula general de diferencias centradas para malla NO uniforme
+% f'(xi) = [h1^2 * f2 - h2^2 * f0 + (h2^2 - h1^2) * f1] / [ h1 * h2 * (h1 + h2) ]
+% h1 = paso hacia atras, h2 = paso hacia adelante -> precision O(h^2)
+
+% Vector de derivadas (extremos quedan en NaN)
+dVdd = NaN(1,n);
+
+for i = 2:n-1
+    h1 = d(i) - d(i-1); % paso izquierdo
+    h2 = d(i+1) - d(i); % paso derecho
+    f0 = V(i-1); f1 = V(i); f2 = V(i+1);
+    
+    dVdd(i) = (h1^2 * f2 - h2^2 * f0 + (h2^2 - h1^2) * f1) / (h1 * h2 * (h1 + h2));
+end
+
+% 3. Resultado puntual en d = 30 cm
+idx30 = find(d == 30);
+
+fprintf('\n--- Calculo de dV/dd en d = 30 cm (malla no uniforme) ---\n');
+fprintf('Punto: d = %d cm\n', d(idx30));
+fprintf('h1 (atras): %d cm\n', d(idx30) - d(idx30-1));
+fprintf('h2 (adelante): %d cm\n', d(idx30+1) - d(idx30));
+fprintf('dVdd: %.4f V/cm\n', dVdd(idx30));
+fprintf('========================================\n');
+
+% 4. Verificacion cruzada usando funcion nativa gradient() de MATLAB
+% (gradient tambien usa diferencias centradas de 2do orden en mallas no uniformes)
+dVdd_check = gradient(V, d);
+fprintf('Verificacion con gradient: dV/dd en d=30 -> %.4f V/cm\n', dVdd_check(idx30));
+
+% 5. Graficos
+figure('Color', 'w', 'Position', [100 100 950 450]);
+
+% Grafico 1: Voltaje vs distancia
+subplot(1,2,1);
+plot(d, V, 'b.-', 'LineWidth', 1.3, 'MarkerSize', 12); hold on;
+plot(d(idx30), V(idx30), 'ro', 'MarkerSize', 10, 'MarkerFaceColor', 'r');
+xlabel('Distancia d (cm)');
+ylabel('Voltaje V (V)');
+title('Voltaje vs Distancia');
+grid on;
+legend('Datos experimentales', 'Punto d=30 cm', 'Location', 'northeast');
+
+% Grafico 2: Derivada dV/dd vs distancia
+subplot(1,2,2);
+plot(d, dVdd, 'm.-', 'LineWidth', 1.3, 'MarkerSize', 12); hold on;
+plot(d(idx30), dVdd(idx30), 'ro', 'MarkerSize', 10, 'MarkerFaceColor', 'r');
+yline(0, 'k--');
+xlabel('Distancia d (cm)');
+ylabel('dV/dd (V/cm)');
+title('Tasa de atenuacion instantanea');
+grid on;
+legend('dV/dd (dif. finitas centradas)', 'Punto d=30 cm', 'Location', 'southeast');
+
+sgtitle('Derivacion Numerica - Malla No Uniforme O(h^2)');
