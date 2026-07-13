@@ -1,0 +1,50 @@
+% --- Código de Interpolación ---
+clear; clc; close all;
+
+% Datos completos experimentales
+d = [5 8 10 12 15 18 20 22 25 28 30 33 36 40 44 48 52 56 60 64 68 72 76 80 85 90 95 100 110 120];
+V = [7.62 7.58 7.55 7.50 7.45 7.37 7.26 7.16 6.71 6.52 6.41 6.34 6.19 5.95 5.89 5.75 5.62 5.55 5.50 4.45 4.32 4.28 4.20 3.89 1.91 1.66 0.86 0.54 0.28 0.26];
+
+% Puntos cercanos para Lagrange
+d1 = 25; V1 = 6.71;
+d2 = 28; V2 = 6.52;
+
+% LAGRANGE (lineal)
+lagrange = @(x) V1*(x-d2)/(d1-d2) + V2*(x-d1)/(d2-d1);
+V26_L = lagrange(26);
+V27_L = lagrange(27);
+
+% SPLINE
+V26_S = spline(d, V, 26);
+V27_S = spline(d, V, 27);
+
+% Curva spline para gráfica
+d_plot = 25:0.1:28;
+V_plot = spline(d, V, d_plot);
+
+% --- GRÁFICO ---
+figure('Color', 'w');
+plot(d, V, 'ko', 'MarkerSize', 6);
+hold on;
+plot(d_plot, V_plot, 'r-', 'LineWidth', 2);
+
+% Puntos estimados
+plot(26, V26_L, 'ks', 'MarkerFaceColor', 'b');
+plot(27, V27_L, 'ks', 'MarkerFaceColor', 'b');
+plot(26, V26_S, 'kd', 'MarkerFaceColor', 'g');
+plot(27, V27_S, 'kd', 'MarkerFaceColor', 'y');
+
+grid on;
+xlabel('Distancia (cm)');
+ylabel('Voltaje (V)');
+title('Comparación: Lagrange vs Spline');
+legend('Datos', 'Spline', 'Lagrange 26', 'Lagrange 27', 'Spline 26', 'Spline 27');
+
+% --- RESULTADOS ---
+fprintf('--- LAGRANGE ---\n');
+fprintf('V(26) = %.3f V\n', V26_L);
+fprintf('V(27) = %.3f V\n', V27_L);
+
+fprintf('\n--- SPLINE ---\n');
+fprintf('V(26) = %.3f V\n', V26_S);
+fprintf('V(27) = %.3f V\n', V27_S);
