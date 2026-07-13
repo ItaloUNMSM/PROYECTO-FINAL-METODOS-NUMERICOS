@@ -1,0 +1,73 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Definición de la Ecuación Diferencial f(d,V) = dV/dd
+# Modelo logístico deducido del divisor de tensión y comportamiento LDR
+def f(d, V):
+    return -(1.6 / d) * V * (1 - V / 9.0)
+
+# 2. Condiciones iniciales y parámetros del método
+d0 = 5.0          # Distancia inicial experimental (cm)
+V0 = 7.62         # Voltaje inicial experimental (V)
+h = 5.0           # Tamaño de paso seleccionado (cm)
+d_final = 120.0   # Distancia final del experimento (cm)
+
+n_pasos = int((d_final - d0) / h)
+
+# Vectores para almacenar los resultados simulados y graficarlos luego
+d_sim = [d0]
+V_sim = [V0]
+
+print("--- Método RK4: Simulación del Modelo Dinámico ---")
+print(f"Condición inicial: d = {d0:03.1f} cm | V_RK4 = {V0:.4f} V")
+
+d_actual = d0
+V_actual = V0
+
+# 3. Bucle iterativo del algoritmo RK4
+for i in range(1, n_pasos + 1):
+    # Cálculo de las 4 pendientes ponderadas
+    k1 = f(d_actual, V_actual)
+    k2 = f(d_actual + h/2, V_actual + h/2 * k1)
+    k3 = f(d_actual + h/2, V_actual + h/2 * k2)
+    k4 = f(d_actual + h, V_actual + h * k3)
+    
+    # Cálculo del siguiente valor de Voltaje
+    V_siguiente = V_actual + (h/6) * (k1 + 2*k2 + 2*k3 + k4)
+    
+    d_actual += h
+    V_actual = V_siguiente
+    
+    # Almacenamiento y muestra de datos
+    d_sim.append(d_actual)
+    V_sim.append(V_actual)
+    
+    print(f"Paso {i:2d}: d = {d_actual:03.1f} cm | V_RK4 = {V_actual:.4f} V")
+
+# 4. GENERACIÓN DE LA GRÁFICA COMPARATIVA (TEORÍA VS EXPERIMENTO)
+# Datos experimentales completos (30 mediciones de la tabla)
+d_exp = np.array([5, 8, 10, 12, 15, 18, 20, 22, 25, 28, 30, 33, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 85, 90, 95, 100, 110, 120])
+V_exp = np.array([7.62, 7.58, 7.55, 7.50, 7.45, 7.37, 7.26, 7.16, 6.71, 6.52, 6.41, 6.34, 6.19, 5.95, 5.89, 5.75, 5.62, 5.55, 5.50, 4.45, 4.32, 4.28, 4.20, 3.89, 1.91, 1.66, 0.86, 0.54, 0.28, 0.26])
+
+# Configurar el lienzo de la figura
+plt.figure(figsize=(10, 6))
+
+# Trazar la curva simulada numéricamente por RK4 (Teoría)
+plt.plot(d_sim, V_sim, 'r-', linewidth=2.5, label='Modelo Numérico RK4 (Teórico)')
+
+# Trazar los puntos experimentales medidos (Práctica)
+plt.plot(d_exp, V_exp, 'bo', markersize=5, alpha=0.7, label='Datos Experimentales (Medidos)')
+
+# Resaltar la condición inicial
+plt.plot(d0, V0, 'ks', markersize=8, label='Condición Inicial (5, 7.62)')
+
+# Estilos de la gráfica
+plt.title('Validación del Modelo: Simulación RK4 vs. Datos Experimentales', fontsize=14, fontweight='bold')
+plt.xlabel('Distancia espacial d (cm)', fontsize=12)
+plt.ylabel('Voltaje V (V)', fontsize=12)
+plt.legend(loc='upper right', fontsize=11)
+plt.grid(True, linestyle=':', alpha=0.7)
+
+# Mostrar la gráfica en pantalla
+plt.tight_layout()
+plt.show()
