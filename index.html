@@ -67,7 +67,7 @@
         
         label { display: flex; align-items: center; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted); }
         
-        /* --- INFO TOOLTIPS CORREGIDOS (Se abren hacia abajo) --- */
+        /* --- INFO TOOLTIPS --- */
         .info-tooltip { position: relative; display: inline-flex; align-items: center; margin-left: 6px; cursor: help; }
         .info-tooltip .icon { display: flex; justify-content: center; align-items: center; width: 14px; height: 14px; border-radius: 50%; background: var(--neon-blue); color: #020617; font-size: 10px; font-weight: 800; font-family: monospace; transition: 0.3s; box-shadow: 0 0 5px var(--neon-blue); }
         .info-tooltip:hover .icon { background: var(--text-main); box-shadow: 0 0 10px #fff; }
@@ -78,16 +78,14 @@
             font-size: 0.75rem; font-weight: normal; line-height: 1.4;
             box-shadow: 0 10px 25px rgba(0,0,0,0.8); pointer-events: none;
             transition: opacity 0.3s, transform 0.3s;
-            top: 150%; left: 50%; transform: translateX(-50%) translateY(-10px); /* Ahora abren hacia abajo */
+            top: 150%; left: 50%; transform: translateX(-50%) translateY(-10px);
         }
         .info-tooltip .text::after { 
             content: ''; position: absolute; bottom: 100%; left: 50%; 
             margin-left: -5px; border-width: 5px; border-style: solid; 
-            border-color: transparent transparent var(--neon-blue) transparent; /* Flecha apuntando arriba */
+            border-color: transparent transparent var(--neon-blue) transparent; 
         }
         .info-tooltip:hover .text { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
-        
-        /* Ajuste de tooltips en los paneles laterales para que no se oculten por los lados */
         .controls .info-tooltip .text { left: 0; transform: translateX(-15%) translateY(-10px); }
         .controls .info-tooltip .text::after { left: 15%; }
         .controls .info-tooltip:hover .text { transform: translateX(-15%) translateY(0); }
@@ -108,13 +106,12 @@
         .visualization { flex: 1; padding: 20px; display: flex; flex-direction: column; min-width: 0;}
         .chart-container { flex: 1; position: relative; min-height: 250px; }
 
-        /* Simulación Visuals Generales */
+        /* Simulación Visuals */
         .virtual-lab { padding: 20px; margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; z-index: 5;}
         .lab-controls { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-end; background: rgba(0,0,0,0.4); padding: 12px 25px; border-radius: 8px; border: 1px solid var(--glass-border); width: 100%; max-width: 1100px; justify-content: center; flex-wrap: wrap;}
         .compact-inputs { display: flex; gap: 10px; background: rgba(255,255,255,0.05); padding: 8px 15px; border-radius: 6px;}
         .compact-inputs div { display: flex; flex-direction: column; align-items: center; }
         
-        /* Simulación LDR */
         .simulation-area { width: 100%; max-width: 800px; height: 100px; position: relative; border-bottom: 2px solid var(--glass-border); display: flex; align-items: center; background: rgba(0,0,0,0.2); border-radius: 8px 8px 0 0; }
         .ldr-sensor { position: absolute; right: 20px; width: 25px; height: 45px; background: #e74c3c; border-radius: 4px; box-shadow: 0 0 15px #e74c3c; }
         .flashlight-container { position: absolute; left: 0; display: flex; align-items: center; transition: 0.1s; }
@@ -122,21 +119,18 @@
         .light-beam { height: 50px; background: linear-gradient(90deg, rgba(0, 210, 255, 0.8), transparent); clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%); }
         .readings { margin-top: 10px; font-size: 1.1rem; font-family: monospace; color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); }
 
-        /* Simulación RF con CIUDAD */
         .telecom-visual { width: 100%; max-width: 800px; height: 140px; position: relative; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 50px; background: linear-gradient(to top, rgba(255,255,255,0.05), transparent); border-bottom: 2px solid var(--glass-border); overflow: hidden;}
         .cityscape { position: absolute; bottom: 0; left: 0; right: 0; height: 0px; background: repeating-linear-gradient(90deg, #34495e, #34495e 20px, transparent 20px, transparent 25px), repeating-linear-gradient(90deg, #2c3e50, #2c3e50 35px, transparent 35px, transparent 45px); opacity: 0.8; transition: height 0.3s ease, opacity 0.3s ease; z-index: 1;}
         .tower { width: 12px; height: 90px; background: #7f8c8d; position: relative; box-shadow: 0 0 10px rgba(255,255,255,0.2); z-index: 2;}
         .tower::after { content: ''; position: absolute; top: -5px; left: -4px; width: 20px; height: 8px; background: var(--danger); border-radius: 10px; box-shadow: 0 0 15px var(--danger); }
         .rf-wave { position: absolute; top: 15px; left: 60px; right: 60px; height: 50px; background: repeating-radial-gradient(circle at 0 50%, rgba(0, 210, 255, 0.4) 0, transparent 25px); transition: background 0.3s; z-index: 2;}
 
-        /* Turbidímetro Tanque */
         .tank-container { width: 100%; max-width: 600px; height: 100px; border: 2px solid var(--neon-blue); border-radius: 8px; position: relative; background: rgba(0, 210, 255, 0.1); overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: inset 0 0 20px rgba(0,210,255,0.2); }
         .water-murkiness { position: absolute; top:0; left:0; right:0; bottom:0; background: #2c3e50; opacity: 0; transition: 0.2s; z-index: 1; }
         .turbi-laser { width: 15px; height: 15px; background: #00ff88; border-radius: 0 50% 50% 0; z-index: 2; margin-left: -2px; box-shadow: 0 0 15px #00ff88; }
         .turbi-beam { height: 6px; flex: 1; background: rgba(0, 255, 136, 0.8); z-index: 2; transition: 0.2s; box-shadow: 0 0 20px #00ff88; }
         .turbi-sensor { width: 12px; height: 30px; background: #ecf0f1; border-radius: 3px; z-index: 2; margin-right: 5px; }
 
-        /* MathJax Cards */
         .analysis-container { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .card { padding: 25px; }
         .card h3 { display:flex; align-items:center; margin-top: 0; color: var(--neon-blue); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; }
@@ -145,7 +139,6 @@
 </head>
 <body>
 
-    <!-- FONDOS LÍQUIDOS -->
     <div class="background-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -164,19 +157,18 @@
         <button class="tab-btn" onclick="openTab(event, 'compTab')">📊 Matemática</button>
     </div>
 
-    <!-- PESTAÑA 1: LDR -->
     <div id="labTab" class="tab-content active">
         <div class="virtual-lab glass-panel">
             <div class="lab-controls">
                 <div>
                     <label>Distancia (cm)
-                        <div class="info-tooltip"><span class="icon">i</span><div class="text">Mayor distancia aleja la fuente de luz del sensor, simulando atenuación natural y haciendo que el voltaje de lectura caiga gradualmente.</div></div>
+                        <div class="info-tooltip"><span class="icon">i</span><div class="text">Mayor distancia aleja la fuente de luz del sensor, simulando atenuación natural. El voltaje decae según la Ley de la Inversa del Cuadrado.</div></div>
                     </label>
                     <input type="range" id="distSlider" min="5" max="120" value="20" oninput="updateLab()">
                 </div>
                 <div>
                     <label>Tiempo (s)
-                        <div class="info-tooltip"><span class="icon">i</span><div class="text">Define cuántos segundos durará la recolección automática de datos. Mientras el tiempo corre, mueve la distancia para trazar una curva rica.</div></div>
+                        <div class="info-tooltip"><span class="icon">i</span><div class="text">Define cuántos segundos durará la recolección de datos. Mueve el deslizador de distancia mientras corre el tiempo para generar una curva experimental rica.</div></div>
                     </label>
                     <input type="number" id="recordTimeLab" value="10" min="5" max="30">
                 </div>
@@ -191,7 +183,7 @@
         </div>
         <div class="container">
             <aside class="controls glass-panel">
-                <label>Datos (d, V) <div class="info-tooltip"><span class="icon">i</span><div class="text">Muestras discretas capturadas por el sensor. Puedes escribir valores manualmente aquí para poner a prueba los algoritmos.</div></div></label>
+                <label>Datos (d, V) <div class="info-tooltip"><span class="icon">i</span><div class="text">Muestras discretas capturadas por el sensor. Puedes borrar, modificar o añadir puntos de calibración de forma manual.</div></div></label>
                 <textarea id="dataInput" placeholder="Ej: 20.0, 7.26"></textarea>
                 
                 <select id="methodSelect" onchange="toggleInputsLab(); runSimulationLab();" style="margin-top:15px;">
@@ -204,12 +196,11 @@
             </aside>
             <main class="visualization glass-panel">
                 <div class="chart-container"><canvas id="mainChart"></canvas></div>
-                <div id="resultsLab" class="results-panel">Mueve la fuente de luz y graba datos.</div>
+                <div id="resultsLab" class="results-panel">Mueve la fuente de luz y graba datos experimentales.</div>
             </main>
         </div>
     </div>
 
-    <!-- PESTAÑA 2: RF (DRIVE-TEST URBANO) -->
     <div id="fieldTab" class="tab-content">
         <div class="virtual-lab glass-panel">
             <h3 style="margin:0 0 5px 0; color: var(--neon-blue);">Simulación Drive-Test en Entornos Urbanos</h3>
@@ -217,7 +208,7 @@
                 <div style="display: flex; gap: 15px; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 15px;">
                     <div>
                         <label>Ruta (km) 
-                            <div class="info-tooltip"><span class="icon">i</span><div class="text">Simula el movimiento de un vehículo alejándose de la torre celular. A más distancia, la onda de radio dispersa su energía.</div></div>
+                            <div class="info-tooltip"><span class="icon">i</span><div class="text">Simula el movimiento de un vehículo alejándose de la torre celular. A mayor distancia, la onda dispersa energía en el espacio libre.</div></div>
                         </label>
                         <input type="range" id="distRF" min="1" max="50" value="10" oninput="updateRF()">
                     </div>
@@ -235,15 +226,15 @@
                 </div>
                 <div class="compact-inputs">
                     <div>
-                        <label>Tx(dBm) <div class="info-tooltip"><span class="icon">i</span><div class="text">Potencia de transmisión. Valores mayores inyectan más fuerza bruta a la onda, permitiéndole llegar más lejos.</div></div></label>
+                        <label>Tx(dBm) <div class="info-tooltip"><span class="icon">i</span><div class="text">Potencia de Transmisión. Valores altos inyectan más energía bruta a la señal, extendiendo su alcance máximo antes de morir.</div></div></label>
                         <input type="number" id="txPower" value="25" style="width:65px;" onchange="runTelecomSimulation()">
                     </div>
                     <div>
-                        <label>Ganancia <div class="info-tooltip"><span class="icon">i</span><div class="text">Suma de ganancia de antenas. Concentra la onda en una sola dirección como un láser en lugar de iluminar como un foco.</div></div></label>
+                        <label>Ganancia <div class="info-tooltip"><span class="icon">i</span><div class="text">Suma de ganancia direccional (Tx + Rx). Concentra la energía de la onda de forma enfocada en vez de irradiarla omnidireccionalmente.</div></div></label>
                         <input type="number" id="txGain" value="15" style="width:65px;" onchange="runTelecomSimulation()">
                     </div>
                     <div>
-                        <label>F(GHz) <div class="info-tooltip"><span class="icon">i</span><div class="text">Frecuencia de la onda. Las ondas de alta frecuencia (ej. 5.8 GHz) llevan más datos, pero rebotan más y penetran menos los obstáculos.</div></div></label>
+                        <label>F(GHz) <div class="info-tooltip"><span class="icon">i</span><div class="text">Frecuencia de Operación (Ej. 5.8 GHz). Altas frecuencias llevan más ancho de banda pero se atenúan mucho más rápido en el aire.</div></div></label>
                         <input type="number" id="freqVal" value="5.8" step="0.1" style="width:65px;" onchange="runTelecomSimulation()">
                     </div>
                 </div>
@@ -258,7 +249,7 @@
 
         <div class="container">
             <aside class="controls glass-panel">
-                <textarea id="dataRF" placeholder="Drive-Test Data (Km, dBm)"></textarea>
+                <textarea id="dataRF" placeholder="Datos Drive-Test (Km, dBm)"></textarea>
                 <select id="telecomMethod" onchange="toggleInputsTelecom(); runTelecomSimulation();" style="margin-top:15px;">
                     <option value="lagrange">Lagrange (Rellenar Puntos Ciegos)</option>
                     <option value="nr">Newton-Raphson (Límite Cobertura)</option>
@@ -270,21 +261,20 @@
             </aside>
             <main class="visualization glass-panel">
                 <div class="chart-container"><canvas id="telecomChart"></canvas></div>
-                <div id="telecomResults" class="results-panel" style="border-left-color: var(--warning);">Inicia la grabación y mueve la densidad urbana...</div>
+                <div id="telecomResults" class="results-panel" style="border-left-color: var(--warning);">Selecciona un método. Si no hay datos grabados, se usará la teoría ideal.</div>
             </main>
         </div>
     </div>
 
-    <!-- PESTAÑA 3: TURBIDÍMETRO -->
     <div id="turbiTab" class="tab-content">
         <div class="virtual-lab glass-panel">
             <h3 style="margin:0 0 5px 0; color: var(--neon-blue);">Turbidímetro Industrial</h3>
-            <p style="margin: 0 0 15px 0; font-size: 0.85rem; color: var(--text-muted);">Monitoreo continuo para eventos de contaminación.</p>
+            <p style="margin: 0 0 15px 0; font-size: 0.85rem; color: var(--text-muted);">Monitoreo continuo para eventos de contaminación en tuberías.</p>
             
             <div class="lab-controls">
                 <div>
                     <label>Concentración (NTU)
-                        <div class="info-tooltip"><span class="icon">i</span><div class="text">Unidades de turbidez. Aumentar esto simula partículas de lodo o químicos entrando al agua, bloqueando el paso de la luz óptica.</div></div>
+                        <div class="info-tooltip"><span class="icon">i</span><div class="text">Unidades de turbidez (Nephelometric Turbidity Units). Aumentar esto simula partículas de lodo o químicos bloqueando la luz en el agua.</div></div>
                     </label>
                     <input type="range" id="turbiSlider" min="0" max="100" value="0" oninput="updateTurbi()">
                 </div>
@@ -305,29 +295,30 @@
 
         <div class="container">
             <aside class="controls glass-panel">
-                <textarea id="turbiData" placeholder="Datos (NTU, Voltaje)..."></textarea>
+                <textarea id="turbiData" placeholder="Datos de Calibración (NTU, V)"></textarea>
                 <select id="turbiMethod" onchange="toggleInputsTurbi(); runTurbiSimulation();" style="margin-top:15px;">
                     <option value="lagrange">Lagrange (Calibración Suave)</option>
                     <option value="nr">Newton-Raphson (Alarma Crítica)</option>
+                    <option value="rk4">RK4 (EDO de Absorción)</option>
+                    <option value="simpson">Simpson 1/3 (Opacidad Total)</option>
                 </select>
                 <div id="turbiDynamic" style="margin-top:10px;"></div>
                 <button class="btn-main" onclick="runTurbiSimulation()">Analizar Fluido</button>
             </aside>
             <main class="visualization glass-panel">
                 <div class="chart-container"><canvas id="turbiChart"></canvas></div>
-                <div id="turbiResults" class="results-panel">Inicia grabación y ajusta la turbidez...</div>
+                <div id="turbiResults" class="results-panel">Selecciona un método para analizar las muestras del fluido.</div>
             </main>
         </div>
     </div>
 
-    <!-- PESTAÑA 4: ANÁLISIS MATEMÁTICO -->
     <div id="compTab" class="tab-content">
         <div class="analysis-container">
             <div class="card glass-panel">
                 <h3>1. Óptica: EDO del LDR
-                    <div class="info-tooltip"><span class="icon">i</span><div class="text">El método Runge-Kutta 4 (RK4) soluciona esta ecuación paso a paso trazando la curva teórica perfecta.</div></div>
+                    <div class="info-tooltip"><span class="icon">i</span><div class="text">El algoritmo numérico Runge-Kutta 4 (RK4) simula esta ecuación diferencial integrándola por "pasos" h para construir la gráfica ideal de decaimiento.</div></div>
                 </h3>
-                <p>El arreglo del divisor de voltaje genera una curva no lineal. Se deduce la siguiente Ecuación Diferencial Ordinaria (EDO), resuelta mediante <strong>Runge-Kutta de 4to Orden (RK4)</strong>:</p>
+                <p>El arreglo del divisor de voltaje genera una curva no lineal. Se deduce la siguiente Ecuación Diferencial Ordinaria (EDO), que dicta la tasa exacta de caída lumínica:</p>
                 <div class="math-box">
                     $$ \frac{dV}{dd} = -\frac{\gamma}{d} \cdot V \left( 1 - \frac{V}{9} \right) $$
                 </div>
@@ -336,9 +327,9 @@
 
             <div class="card glass-panel">
                 <h3>2. Radiofrecuencia: Path Loss y Densidad Urbana
-                    <div class="info-tooltip"><span class="icon">i</span><div class="text">N-R usa la derivada de esta función para calcular dónde la línea de cobertura cruza la línea roja de ruido térmico.</div></div>
+                    <div class="info-tooltip"><span class="icon">i</span><div class="text">N-R usa la derivada de esta función para ubicar rápidamente (en menos de 5 iteraciones) el kilómetro exacto donde la señal choca con el piso de ruido.</div></div>
                 </h3>
-                <p>La pérdida de trayectoria (FSPL) decae logarítmicamente. Al introducir "Densidad Urbana" ($U$), añadimos un factor de absorción lineal a la derivada (resoluble por RK4):</p>
+                <p>La pérdida de trayectoria (FSPL) decae logarítmicamente. Al introducir "Densidad Urbana" ($U$), añadimos un factor de absorción lineal a la derivada (resoluble de nuevo por RK4):</p>
                 <div class="math-box">
                     $$ P_{rx}(d) = P_{tx} + G - 20\log_{10}(d) - 20\log_{10}(f) - 92.45 - \left(\frac{U}{100} \cdot \alpha \cdot d\right) $$
                 </div>
@@ -349,9 +340,9 @@
 
             <div class="card glass-panel">
                 <h3>3. Turbidimetría: Beer-Lambert
-                    <div class="info-tooltip"><span class="icon">i</span><div class="text">Lagrange local se utiliza aquí para calibrar el sensor sin que los grados del polinomio se disparen (Fenómeno de Runge).</div></div>
+                    <div class="info-tooltip"><span class="icon">i</span><div class="text">La interpolación matemática de Lagrange se usa aquí para trazar una curva de calibración suave entre mediciones, permitiendo predecir estados intermedios del líquido.</div></div>
                 </h3>
-                <p>En medios fluidos la luz sufre absorción molecular, gobernada por la <strong>Ley de Beer-Lambert</strong>:</p>
+                <p>En medios fluidos la luz sufre absorción molecular de fotones, un comportamiento drástico gobernado por la <strong>Ley de Beer-Lambert</strong>:</p>
                 <div class="math-box">
                     $$ I = I_0 \cdot e^{-\alpha \cdot C \cdot x} \implies V(C) = V_{max} \cdot e^{-k \cdot C} $$
                 </div>
@@ -373,7 +364,6 @@
         let myChart = null, telecomChartObj = null, turbiChartObj = null;
         let recordingTimerLab = null, recordingTimerTurbi = null, recordingTimerRF = null;
 
-        // Gestión de Pestañas
         function openTab(evt, tabName) {
             document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
             document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
@@ -386,7 +376,7 @@
             if(tabName === 'compTab' && window.MathJax) MathJax.typesetPromise();
         }
 
-        // --- MATEMÁTICAS ---
+        // --- MATEMÁTICAS PROTEGIDAS ---
         function lagrangeBase(data, xEval) {
             let y = 0;
             for (let i = 0; i < data.length; i++) {
@@ -430,7 +420,7 @@
                 if (elapsed >= durationSec * 1000) { clearInterval(recordingTimerLab); btn.disabled = false; btn.innerText = "🔴 Grabar"; }
             }, 500);
         }
-        function clearDataLab() { document.getElementById('dataInput').value = ""; runSimulationLab(); }
+        function clearDataLab() { clearInterval(recordingTimerLab); document.getElementById('btnRecordLab').disabled = false; document.getElementById('btnRecordLab').innerText = "🔴 Grabar"; document.getElementById('dataInput').value = ""; runSimulationLab(); }
         
         function toggleInputsLab() {
             const m = document.getElementById('methodSelect').value, c = document.getElementById('dynamicInputsLab');
@@ -447,32 +437,38 @@
         }
         function runSimulationLab() {
             const data = parseData('dataInput'), m = document.getElementById('methodSelect').value;
-            let datasets = [{ label: 'Señal Capturada', data: data, backgroundColor: '#00d2ff', borderColor: '#00d2ff', showLine: true, fill: false }];
-            if(data.length >= 2) {
-                if (m === 'lagrange') {
+            let datasets = [];
+            if(data.length > 0) datasets.push({ label: 'Señal Capturada', data: data, backgroundColor: '#00d2ff', borderColor: '#00d2ff', showLine: true, fill: false });
+            
+            if (m === 'lagrange') {
+                if (data.length >= 2) {
                     let x = parseFloat(document.getElementById('evalPoint')?.value || 26), y = lagrangeLocal(data, x);
                     datasets.push({ label: `Pred. Local`, data: [{x, y}], backgroundColor: '#ff4757', pointRadius: 8, pointStyle: 'rectRot' });
                     document.getElementById('resultsLab').innerHTML = `✅ Lagrange: V(${x}) = <b>${y.toFixed(4)} V</b>`;
-                } else if (m === 'rk4') {
-                    let d = data[0].x, V = data[0].y, rk = [{x:d, y:V}], g = parseFloat(document.getElementById('gammaVal')?.value||1.6), h = parseFloat(document.getElementById('hVal')?.value||5);
-                    let f = (d, V) => -(g/d)*V*(1-(V/9));
-                    while(d < data[data.length-1].x) { let k1=f(d,V), k2=f(d+h/2,V+h/2*k1), k3=f(d+h/2,V+h/2*k2), k4=f(d+h,V+h*k3); V+=(h/6)*(k1+2*k2+2*k3+k4); d+=h; rk.push({x:d, y:Math.max(0,V)}); }
-                    datasets.push({ label: 'Perfil RK4', data: rk, borderColor: '#2ecc71', borderDash: [5,5], pointRadius: 0, showLine: true });
-                    document.getElementById('resultsLab').innerHTML = `✅ EDO RK4 Trazada.`;
-                } else if (m === 'simpson') {
+                } else document.getElementById('resultsLab').innerHTML = `⚠️ Graba datos primero.`;
+            } else if (m === 'rk4') {
+                let d = data.length>0 ? data[0].x : 5, V = data.length>0 ? data[0].y : 7.62, rk = [{x:d, y:V}];
+                let g = parseFloat(document.getElementById('gammaVal')?.value||1.6);
+                let h = Math.max(0.1, Math.abs(parseFloat(document.getElementById('hVal')?.value||5))); // Blindaje contra h=0 o negativos
+                let f = (d, V) => -(g/Math.max(0.1, d))*V*(1-(V/9)); // Blindaje contra d=0
+                while(d <= 120) { let k1=f(d,V), k2=f(d+h/2,V+h/2*k1), k3=f(d+h/2,V+h/2*k2), k4=f(d+h,V+h*k3); V+=(h/6)*(k1+2*k2+2*k3+k4); V=Math.max(0.001,V); d+=h; rk.push({x:d, y:V}); }
+                datasets.push({ label: 'Perfil Ideal (RK4)', data: rk, borderColor: '#2ecc71', borderDash: [5,5], pointRadius: 0, showLine: true });
+                document.getElementById('resultsLab').innerHTML = `✅ EDO RK4 (Teórica) Resuelta. Graba para comparar.`;
+            } else if (m === 'simpson') {
+                if(data.length >= 3) {
                     let st = data[0].x, end = data[data.length-1].x, h = (end-st)/20, sO=0, sE=0;
                     for(let i=1; i<20; i++) { let v = lagrangeLocal(data, st+i*h); i%2!==0 ? sO+=v : sE+=v; }
                     let area = (h/3)*(data[0].y + 4*sO + 2*sE + data[data.length-1].y);
-                    datasets[0].fill = 'origin'; datasets[0].backgroundColor = 'rgba(0, 210, 255, 0.15)';
+                    if(datasets.length>0){ datasets[0].fill = 'origin'; datasets[0].backgroundColor = 'rgba(0, 210, 255, 0.15)'; }
                     document.getElementById('resultsLab').innerHTML = `✅ Energía Acumulada = <b>${area.toFixed(4)} V·cm</b>`;
-                }
+                } else document.getElementById('resultsLab').innerHTML = `⚠️ Graba múltiples puntos para integrar el área.`;
             }
             if (myChart) myChart.destroy();
             let opt = JSON.parse(JSON.stringify(chartOptionsBase)); opt.scales.x.title.text = 'Distancia (cm)'; opt.scales.y.title.text = 'Voltaje (V)'; opt.scales.y.min = 0;
             myChart = new Chart(document.getElementById('mainChart').getContext('2d'), { type: 'scatter', data: { datasets }, options: opt});
         }
 
-        // --- 2. RF (CON DENSIDAD URBANA) ---
+        // --- 2. RF (DRIVE TEST) ---
         function getRFPower(d, u, ptx, g, f) {
             let ideal = ptx + g - 20*Math.log10(d) - 20*Math.log10(f) - 92.45 - ((u/100) * 0.4 * d);
             return ideal + (Math.random()-0.5)*1.5; 
@@ -488,7 +484,6 @@
             if (u > 50) wave.style.background = `repeating-radial-gradient(circle at 0 50%, rgba(255, 71, 87, 0.4) 0, transparent 25px)`;
             else wave.style.background = `repeating-radial-gradient(circle at 0 50%, rgba(0, 210, 255, 0.4) 0, transparent 25px)`;
         }
-        
         function startRecordingRF() {
             const durationSec = parseInt(document.getElementById('timeRF').value), btn = document.getElementById('btnRecordRF');
             const ptx = parseFloat(document.getElementById('txPower').value), g = parseFloat(document.getElementById('txGain').value), f = parseFloat(document.getElementById('freqVal').value);
@@ -502,21 +497,21 @@
                 if (elapsed >= durationSec * 1000) { clearInterval(recordingTimerRF); btn.disabled = false; btn.innerText = "🔴 Grabar"; }
             }, 500);
         }
-        function clearRF() { document.getElementById('dataRF').value = ""; runTelecomSimulation(); }
+        function clearRF() { clearInterval(recordingTimerRF); document.getElementById('btnRecordRF').disabled = false; document.getElementById('btnRecordRF').innerText = "🔴 Grabar"; document.getElementById('dataRF').value = ""; runTelecomSimulation(); }
 
         function toggleInputsTelecom() {
             const m = document.getElementById('telecomMethod').value, c = document.getElementById('dynamicInputsTelecom');
             let desc = "", inputs = "";
             if (m === 'nr') { 
-                desc = "Calcula iterativamente el kilómetro exacto donde la curva intercepta el piso de ruido (Sensibilidad)."; 
-                inputs = `<label style="display:flex; align-items:center;">Sensibilidad (RX) <div class="info-tooltip"><span class="icon">i</span><div class="text">Nivel de potencia mínimo (Piso de ruido) que la antena receptora necesita para poder conectarse.</div></div></label><input type="number" id="rxObj" value="-80">`; 
+                desc = "Calcula iterativamente el kilómetro exacto donde la curva intercepta el piso de ruido (Límite máximo)."; 
+                inputs = `<label style="display:flex; align-items:center;">Sensibilidad (RX) <div class="info-tooltip"><span class="icon">i</span><div class="text">El piso térmico del hardware (ej. -80 dBm). Si la señal cae por debajo, el usuario pierde cobertura o internet.</div></div></label><input type="number" id="rxObj" value="-80">`; 
             } else if (m === 'lagrange') { 
-                desc = "Interpola puntos ciegos en mediciones de Drive-Test."; 
-                inputs = `<label style="display:flex; align-items:center;">Km a estimar <div class="info-tooltip"><span class="icon">i</span><div class="text">Kilómetro de ruta por donde la cuadrilla de escaneo no pasó. El sistema predecirá la intensidad.</div></div></label><input type="number" id="telEval" value="15" step="0.5">`; 
+                desc = "Interpola puntos ciegos sin necesidad de enviar cuadrillas de medición a ese kilómetro."; 
+                inputs = `<label style="display:flex; align-items:center;">Km a estimar <div class="info-tooltip"><span class="icon">i</span><div class="text">Punto en el mapa (ej. 15.5) donde no se tienen datos reales grabados para predecir si habrá señal celular.</div></div></label><input type="number" id="telEval" value="15" step="0.5">`; 
             } else if (m === 'rk4') { 
-                desc = "Resuelve la EDO de atenuación, sumando la dispersión en espacio libre y la absorción por obstáculos urbanos grabados."; 
-                inputs = `<label style="display:flex; align-items:center;">Paso h (Km) <div class="info-tooltip"><span class="icon">i</span><div class="text">Resolución de integración espacial. Define cada cuántos km se vuelve a calcular la atenuación teórica.</div></div></label><input type="number" id="telStep" value="1">`; 
-            } else if (m === 'simpson') { desc = "Integra la señal a lo largo de la ruta (Densidad Espectral total), vital para análisis de interferencia."; }
+                desc = "Resuelve la EDO de pérdida de radiofrecuencia (Paso h) considerando también la atenuación del concreto si se grabaron datos urbanos."; 
+                inputs = `<label style="display:flex; align-items:center;">Paso h (Km) <div class="info-tooltip"><span class="icon">i</span><div class="text">Saltos de resolución geométrica para el método iterativo RK4. Valores pequeños dan más precisión.</div></div></label><input type="number" id="telStep" value="1">`; 
+            } else if (m === 'simpson') { desc = "Integra la señal a lo largo de la ruta grabada para analizar la densidad de espectro o fuerza total de cobertura en el valle."; }
             c.innerHTML = `<div class="help-desc">${desc}</div><div style="margin-top:10px;">${inputs}</div>`;
         }
 
@@ -526,40 +521,57 @@
             
             let idealData = []; for(let d=0.5; d<=50; d+=0.5) idealData.push({x:d, y:Ptx+G-20*Math.log10(d)-20*Math.log10(F)-92.45});
             let ds = [{label: 'FSPL (Vacío)', data: idealData, borderColor: 'rgba(58, 123, 213, 0.3)', showLine: true, pointRadius:0, fill: false}];
-            
             if (data.length > 0) ds.push({label: 'Datos Drive-Test', data: data, backgroundColor: '#f1c40f', borderColor: '#f1c40f', showLine: true, fill: false});
-            let resHtml = "Inicia la grabación y mueve la densidad urbana...";
+            let resHtml = "Selecciona un método. Si no hay datos, operará en modo Teórico.";
 
-            if (data.length >= 2) {
-                if (m === 'lagrange') {
+            if (m === 'lagrange') {
+                if(data.length>=2){
                     let x = parseFloat(document.getElementById('telEval')?.value || 15), y = lagrangeLocal(data, x);
                     ds.push({ label: `Estimado (d=${x})`, data: [{x, y}], backgroundColor: '#00d2ff', pointRadius: 8, pointStyle: 'rectRot' });
-                    resHtml = `✅ Lagrange: Señal estimada de <b>${y.toFixed(2)} dBm</b>.`;
-                } else if (m === 'nr') {
-                    let rxObj = parseFloat(document.getElementById('rxObj')?.value || -80), d_it = data[Math.floor(data.length/2)].x;
-                    for(let i=0; i<15; i++) {
-                        let f_val = lagrangeLocal(data, d_it) - rxObj;
-                        let d_val = (lagrangeLocal(data, d_it+0.1) - lagrangeLocal(data, d_it-0.1)) / 0.2;
-                        if(Math.abs(d_val)<0.001) break; d_it -= (f_val/d_val);
+                    resHtml = `✅ Lagrange: Señal interpolada de <b>${y.toFixed(2)} dBm</b>.`;
+                } else resHtml = `⚠️ Graba un Drive-Test primero para interpolar.`;
+            } else if (m === 'nr') {
+                let rxObj = parseFloat(document.getElementById('rxObj')?.value || -80), d_it;
+                if(data.length>=2) {
+                    d_it = data[Math.floor(data.length/2)].x;
+                    for(let i=0; i<15; i++) { 
+                        let f_val = lagrangeLocal(data, d_it)-rxObj;
+                        let d_val = (lagrangeLocal(data, d_it+0.1)-lagrangeLocal(data, d_it-0.1))/0.2; 
+                        if(Math.abs(d_val)<0.001) break; 
+                        d_it -= (f_val/d_val); 
+                        if (d_it <= 0) d_it = 0.001; // Blindaje NR Numérico
                     }
-                    ds.push({label:'Límite Real', data:[{x:d_it, y:rxObj}], backgroundColor: '#ff4757', pointRadius: 8});
-                    ds.push({label:'Sensibilidad', data:[{x:0, y:rxObj},{x:50,y:rxObj}], borderColor:'#ff4757', borderDash:[5,5], pointRadius:0, showLine:true});
-                    resHtml = `🚨 N-R: Con ciudad, la red se cae totalmente en el km <b>${d_it.toFixed(2)}</b>.`;
-                } else if (m === 'rk4') {
-                    let h = parseFloat(document.getElementById('telStep')?.value || 1), d0 = data[0].x, p0 = data[0].y, pIdeal0 = Ptx+G-20*Math.log10(d0)-20*Math.log10(F)-92.45;
-                    let alpha_urbano = (pIdeal0 - p0) / d0; if(alpha_urbano < 0) alpha_urbano = 0;
-                    let d = d0, P = p0, rkData = [{x:d, y:P}], func = (dist) => -(8.686 / dist) - alpha_urbano;
-                    while(d < 50) { let k1=func(d), k2=func(d+h/2), k3=func(d+h/2), k4=func(d+h); P += (h/6)*(k1+2*k2+2*k3+k4); d += h; rkData.push({x:d, y:P}); }
-                    ds.push({ label: 'RK4 (Obstáculos)', data: rkData, borderColor: '#00ff88', borderDash: [3,3], pointRadius: 0, showLine: true, borderWidth:2 });
-                    resHtml = `✅ RK4: EDO con absorción urbana resuelta.`;
-                } else if (m === 'simpson') {
+                    resHtml = `🚨 N-R (Drive-Test Real): La red se cae en el km <b>${d_it.toFixed(2)}</b>.`;
+                } else {
+                    let cte = Ptx+G-20*Math.log10(F)-92.45-rxObj; d_it=1;
+                    for(let i=0; i<30; i++) {
+                        let f_val = cte-20*Math.log10(d_it);
+                        let d_val = -20/(d_it*Math.log(10));
+                        d_it = d_it - (f_val/d_val);
+                        if (d_it <= 0) d_it = 0.001; // Blindaje logaritmo negativo
+                    }
+                    resHtml = `🚨 N-R (Teórico Ideal): La red se cae en el km <b>${d_it.toFixed(2)}</b>.`;
+                }
+                ds.push({label:'Límite Crítico', data:[{x:d_it, y:rxObj}], backgroundColor: '#ff4757', pointRadius: 8});
+                ds.push({label:'Sensibilidad', data:[{x:0, y:rxObj},{x:50,y:rxObj}], borderColor:'#ff4757', borderDash:[5,5], pointRadius:0, showLine:true});
+            } else if (m === 'rk4') {
+                let h = Math.max(0.1, Math.abs(parseFloat(document.getElementById('telStep')?.value || 1))); // Blindaje RK4 h
+                let d0 = data.length>0 ? data[0].x : 1, p0 = data.length>0 ? data[0].y : (Ptx+G-20*Math.log10(1)-20*Math.log10(F)-92.45);
+                let alpha = 0; if(data.length>0) { let pIdeal0 = Ptx+G-20*Math.log10(d0)-20*Math.log10(F)-92.45; alpha = (pIdeal0-p0)/d0; if(alpha<0)alpha=0; }
+                let d = d0, P = p0, rkData = [{x:d, y:P}], func = (dist) => -(8.686 / dist) - alpha;
+                while(d <= 50) { let k1=func(d), k2=func(d+h/2), k3=func(d+h/2), k4=func(d+h); P += (h/6)*(k1+2*k2+2*k3+k4); d += h; rkData.push({x:d, y:P}); }
+                ds.push({ label: 'RK4 (EDO Integrada)', data: rkData, borderColor: '#00ff88', borderDash: [3,3], pointRadius: 0, showLine: true, borderWidth:2 });
+                resHtml = `✅ RK4: Pérdida diferencial trazada exitosamente.`;
+            } else if (m === 'simpson') {
+                if(data.length>=3) {
                     let st = data[0].x, end = data[data.length-1].x, n=20, h = (end-st)/n, sO=0, sE=0;
                     for(let i=1; i<n; i++) { let v = lagrangeLocal(data, st+i*h); i%2!==0 ? sO+=v : sE+=v; }
                     let area = (h/3)*(data[0].y + 4*sO + 2*sE + data[data.length-1].y);
                     ds[1].fill = 'origin'; ds[1].backgroundColor = 'rgba(241, 196, 15, 0.2)';
-                    resHtml = `✅ Simpson: Densidad espectral total = <b>${area.toFixed(2)} dBm·km</b>.`;
-                }
+                    resHtml = `✅ Simpson: Espectro acumulado grabado = <b>${area.toFixed(2)} dBm·km</b>.`;
+                } else resHtml = `⚠️ Graba puntos suficientes para poder integrar.`;
             }
+
             if (telecomChartObj) telecomChartObj.destroy();
             let opt = JSON.parse(JSON.stringify(chartOptionsBase)); opt.scales.x.title.text = 'Distancia (Km)'; opt.scales.y.title.text = 'Potencia Rx (dBm)';
             telecomChartObj = new Chart(document.getElementById('telecomChart').getContext('2d'), { type: 'scatter', data: { datasets: ds }, options: opt});
@@ -585,45 +597,69 @@
             }, 500);
         }
         function takeTurbiSample() { const ntu = document.getElementById('turbiSlider').value, txt = document.getElementById('turbiData'); txt.value += (txt.value ? "\n" : "") + `${ntu}, ${getTurbiVolt(ntu).toFixed(2)}`; runTurbiSimulation(); }
-        function clearTurbi() { document.getElementById('turbiData').value = ""; runTurbiSimulation(); }
+        function clearTurbi() { clearInterval(recordingTimerTurbi); document.getElementById('btnRecordTurbi').disabled = false; document.getElementById('btnRecordTurbi').innerText = "🔴 Grabar"; document.getElementById('turbiData').value = ""; runTurbiSimulation(); }
         
         function toggleInputsTurbi() {
             const m = document.getElementById('turbiMethod').value, c = document.getElementById('turbiDynamic');
             let desc = "", inputs = "";
-            if (m === 'lagrange') { desc = "Interpolación suave anti-Runge para calibrar internamente la lectura del sensor ante perfiles dinámicos."; } 
+            if (m === 'lagrange') { desc = "Interpolación suave anti-Runge para calibrar el sensor óptico."; } 
             else if (m === 'nr') { 
                 desc = "Lógica industrial: localiza matemáticamente dónde ejecutar la parada de seguridad."; 
-                inputs = `<label style="display:flex; align-items:center;">Voltaje de Alarma <div class="info-tooltip"><span class="icon">i</span><div class="text">Umbral seguro configurado en el sistema SCADA. Si el voltaje cae por debajo, corta las válvulas.</div></div></label><input type="number" id="turbiAlarm" value="3.5" step="0.1" onchange="runTurbiSimulation()">`; 
+                inputs = `<label style="display:flex; align-items:center;">Alarma (Voltaje de corte) <div class="info-tooltip"><span class="icon">i</span><div class="text">Umbral seguro configurado en el sistema SCADA (ej. 3.5V). El método calculará la concentración tóxica exacta a la que este voltaje se alcanzará, parando el flujo.</div></div></label><input type="number" id="turbiAlarm" value="3.5" step="0.1" onchange="runTurbiSimulation()">`; 
             }
+            else if (m === 'rk4') {
+                desc = "Resuelve la Ecuación Diferencial Ordinaria de la Ley de Beer-Lambert para trazar la absorción perfecta.";
+                inputs = `<label style="display:flex; align-items:center;">Paso h (NTU) <div class="info-tooltip"><span class="icon">i</span><div class="text">Intervalo de integración numérica.</div></div></label><input type="number" id="turbiStep" value="2">`;
+            }
+            else if (m === 'simpson') { desc = "Calcula la Opacidad Total de la muestra fluida integrando el voltaje, útil para sistemas de filtrado por etapas."; }
             c.innerHTML = `<div class="help-desc">${desc}</div><div style="margin-top:10px;">${inputs}</div>`;
         }
 
         function runTurbiSimulation() {
-            const data = parseData('turbiData'), method = document.getElementById('turbiMethod').value, alarmV = parseFloat(document.getElementById('turbiAlarm')?.value || 3.5);
-            let datasets = [{ label: 'Muestras Fluido', data: data, backgroundColor: '#00ff88', borderColor: '#00ff88', showLine: true, fill: false }];
-            let htmlRes = "Inicia la grabación de flujo...";
+            const data = parseData('turbiData'), method = document.getElementById('turbiMethod').value;
+            let datasets = [];
+            if(data.length>0) datasets.push({ label: 'Muestras Fluido', data: data, backgroundColor: '#00ff88', borderColor: '#00ff88', showLine: true, fill: false });
+            let htmlRes = "Analizando el perfil de absorción óptica...";
 
-            if (data.length >= 2) {
-                if(method === 'lagrange') {
+            if (method === 'lagrange') {
+                if(data.length >= 2) {
                     let curve = [], minNTU = data[0].x, maxNTU = data[data.length-1].x;
                     if(maxNTU - minNTU > 0) {
                         for(let i=minNTU; i<=maxNTU; i+= (maxNTU-minNTU)/20) curve.push({x: i, y: lagrangeLocal(data, i)});
                         datasets.push({ label: 'Calibración Suave', data: curve, borderColor: '#f1c40f', borderDash:[3,3], pointRadius:0, showLine:true});
-                        htmlRes = `✅ Modelo calibrado estable.`;
+                        htmlRes = `✅ Curva de calibración interpolada matemáticamente.`;
                     }
-                } 
-                else if (method === 'nr') {
-                    let k_aprox = -Math.log(data[data.length-1].y / data[0].y) / (data[data.length-1].x - data[0].x);
-                    if(!isFinite(k_aprox)) k_aprox = 0.03; 
-                    let func = (T) => data[0].y * Math.exp(-k_aprox * T) - alarmV, deriv = (T) => -k_aprox * data[0].y * Math.exp(-k_aprox * T), t_iter = 10;
-                    for(let i=0; i<20; i++) { let d_val = deriv(t_iter); if(d_val === 0) break; let t_next = t_iter - (func(t_iter) / d_val); if(Math.abs(t_next - t_iter) < 0.01) { t_iter = t_next; break; } t_iter = t_next; }
-                    datasets.push({ label: 'Límite', data: [{x:0, y:alarmV}, {x:100, y:alarmV}], borderColor:'#ff4757', borderDash:[5,5], pointRadius:0, showLine:true});
-                    datasets.push({ label: 'Corte de Válvula', data: [{x:t_iter, y:alarmV}], backgroundColor:'#ff4757', pointRadius:8, pointStyle:'triangle'});
-                    htmlRes = `🚨 Disparo automático de válvulas a los <b>${t_iter.toFixed(1)} NTU</b>.`;
-                }
+                } else htmlRes = `⚠️ Toma muestras de agua o graba la contaminación para trazar.`;
+            } else if (method === 'nr') {
+                let alarmV = parseFloat(document.getElementById('turbiAlarm')?.value || 3.5);
+                let k_aprox = 0.03, V0 = 9.0;
+                if(data.length >= 2) { k_aprox = -Math.log(data[data.length-1].y / data[0].y) / (data[data.length-1].x - data[0].x); if(!isFinite(k_aprox) || k_aprox<=0) k_aprox = 0.03; V0 = data[0].y; }
+                let func = (T) => V0 * Math.exp(-k_aprox * T) - alarmV, deriv = (T) => -k_aprox * V0 * Math.exp(-k_aprox * T), t_iter = 10;
+                for(let i=0; i<20; i++) { let d_val = deriv(t_iter); if(d_val === 0) break; let t_next = t_iter - (func(t_iter) / d_val); if(t_next < 0) t_next = 0; if(Math.abs(t_next - t_iter) < 0.01) { t_iter = t_next; break; } t_iter = t_next; }
+                datasets.push({ label: 'Límite de SCADA', data: [{x:0, y:alarmV}, {x:100, y:alarmV}], borderColor:'#ff4757', borderDash:[5,5], pointRadius:0, showLine:true});
+                datasets.push({ label: 'Disparo de Alarma', data: [{x:t_iter, y:alarmV}], backgroundColor:'#ff4757', pointRadius:8, pointStyle:'triangle'});
+                htmlRes = `🚨 Bloqueo del sistema predicho exactamente a los <b>${t_iter.toFixed(1)} NTU</b> de turbidez.`;
+            } else if (method === 'rk4') {
+                let h = Math.max(0.1, parseFloat(document.getElementById('turbiStep')?.value || 2));
+                let k_aprox = 0.03, V0 = 9.0;
+                if(data.length >= 2) { k_aprox = -Math.log(data[data.length-1].y / data[0].y) / (data[data.length-1].x - data[0].x); if(!isFinite(k_aprox) || k_aprox<=0) k_aprox = 0.03; V0 = data[0].y; }
+                let ntu = data.length>0 ? data[0].x : 0, V = V0, rkData = [{x:ntu, y:V}];
+                let func = (C, Vol) => -k_aprox * Vol; 
+                while(ntu <= 100) { let k1 = func(ntu, V); let k2 = func(ntu+h/2, V+h/2*k1); let k3 = func(ntu+h/2, V+h/2*k2); let k4 = func(ntu+h, V+h*k3); V += (h/6)*(k1 + 2*k2 + 2*k3 + k4); V = Math.max(0.001, V); ntu += h; rkData.push({x:ntu, y:V}); }
+                datasets.push({ label: 'RK4 (Beer-Lambert)', data: rkData, borderColor: '#00d2ff', borderDash:[3,3], pointRadius:0, showLine:true});
+                htmlRes = `✅ RK4: Dinámica de oscurecimiento trazada teóricamente.`;
+            } else if (method === 'simpson') {
+                if(data.length >= 3) {
+                    let st = data[0].x, end = data[data.length-1].x, n=20, h = (end-st)/n, sO=0, sE=0;
+                    for(let i=1; i<n; i++) { let v = lagrangeLocal(data, st+i*h); i%2!==0 ? sO+=v : sE+=v; }
+                    let area = (h/3)*(data[0].y + 4*sO + 2*sE + data[data.length-1].y);
+                    if(datasets.length>0){ datasets[0].fill = 'origin'; datasets[0].backgroundColor = 'rgba(241, 196, 15, 0.2)'; }
+                    htmlRes = `✅ Simpson: Absorción fotónica total = <b>${area.toFixed(2)} V·NTU</b>.`;
+                } else htmlRes = `⚠️ Toma muestras de agua suficientes para integrar.`;
             }
+
             if (turbiChartObj) turbiChartObj.destroy();
-            let opt = JSON.parse(JSON.stringify(chartOptionsBase)); opt.scales.x.title.text = 'Turbidez (NTU)'; opt.scales.y.title.text = 'Voltaje (V)';
+            let opt = JSON.parse(JSON.stringify(chartOptionsBase)); opt.scales.x.title.text = 'Turbidez (NTU)'; opt.scales.y.title.text = 'Voltaje Sensor (V)';
             turbiChartObj = new Chart(document.getElementById('turbiChart').getContext('2d'), { type: 'scatter', data: { datasets }, options: opt });
             document.getElementById('turbiResults').innerHTML = htmlRes;
         }
